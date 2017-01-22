@@ -36,12 +36,13 @@ executable lambda-pi-plus
     PatternUnify.Tm,
     PatternUnify.Unify
   -- other-extensions:
-  build-depends:       base >=4.7 && <4.9
+  build-depends:       base >=4.7 && <4.10
                        , mtl
                        , parsec
                        , pretty
                        , containers
                        , unbound-generics
+                       , th-lift
   hs-source-dirs:      src
   default-language:    Haskell2010
 
@@ -63,7 +64,7 @@ library
     PatternUnify.Unify,
     Language.LambdaPiPlus.Internals
   -- other-extensions:
-  build-depends:       base >=4.7 && <4.9
+  build-depends:       base >=4.7 && <4.10
                        , mtl
                        , parsec
                        , pretty

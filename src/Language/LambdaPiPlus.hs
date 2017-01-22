@@ -35,19 +35,20 @@ compile :: ParseResult -> CompileContext -> Either [(Maybe SourcePos, String)] (
 compile = Internal.compile
 
 initialContext :: CompileContext
-initialContext = $(
-  do
-    preludeText <- qRunIO $ readFile "prelude.lp"
-    let
-      preludeContext =
-        let
-          compResult =
-            do
-              parseResult <- Internal.parse preludeText
-              fst <$> Internal.compile parseResult Internal.emptyContext
-        in
-          case compResult of
-            Left e -> error $ "ERROR compiling prelude: " ++ show e
-            Right ctx -> ctx
-    [|preludeContext|]
-  )
+initialContext = Internal.emptyContext -- $(
+  -- do
+  --   preludeText <- qRunIO $ readFile "prelude.lp"
+  --   let
+  --     preludeContext =
+  --       let
+  --         compResult =
+  --           do
+  --             parseResult <- Internal.parse preludeText
+  --             fst <$> Internal.compile parseResult Internal.emptyContext
+  --       in
+  --         case compResult of
+  --           Left e -> error $ "ERROR compiling prelude: " ++ show e
+  --           Right ctx -> ctx
+  --   [|preludeContext|]
+  -- )
+  

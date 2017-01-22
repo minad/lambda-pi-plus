@@ -76,4 +76,4 @@ doCheck int (state@(inter, out, ve, te), output) ident t k =
                   return (k (y, newVal), modOutput ident y v subs output)
 
 
-$(deriveLiftMany [''Common.Name, ''Common.ITerm_', ''Common.CTerm_', ''Common.Located, ''Common.Region, ''SourcePos, ''LN.Name, ''LN.Bind, ''Tm.Elim, ''Tm.Head, ''Tm.Twin, ''Tm.Can, ''Tm.VAL])
+-- $(deriveLiftMany [''Common.Name, ''Common.ITerm_', ''Common.CTerm_', ''Common.Located, ''Common.Region, ''SourcePos, ''LN.Name, ''LN.Bind, ''Tm.Elim, ''Tm.Head, ''Tm.Twin, ''Tm.Can, ''Tm.VAL])

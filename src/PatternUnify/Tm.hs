@@ -1,4 +1,6 @@
 --{-# OPTIONS_GHC -F -pgmF she #-}
+{-# LANGUAGE DeriveLift #-}
+{-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE FlexibleContexts      #-}
 {-# LANGUAGE FlexibleInstances     #-}
@@ -25,8 +27,10 @@ import Data.Typeable
 import GHC.Generics
 import GHC.Stack (errorWithStackTrace)
 import PatternUnify.Kit
+import Language.Haskell.TH.Lift
 import Prelude hiding (elem, notElem)
 import Unbound.Generics.LocallyNameless
+import Unbound.Generics.LocallyNameless.Name
 import Unbound.Generics.LocallyNameless.Bind
 import Unbound.Generics.LocallyNameless.Internal.Fold (toListOf)
 
@@ -55,7 +59,10 @@ data VAL where
 --        VNil :: VAL -> VAL
 --        VCons :: VAL -> VAL -> VAL -> VAL -> VAL
 --        ERefl :: VAL -> VAL -> VAL
-    deriving (Show, Generic)
+    deriving (Show, Generic, Lift)
+
+deriving instance Lift (Bind Nom VAL)
+deriving instance Lift (Name VAL)
 
 type Type = VAL
 
@@ -75,22 +82,22 @@ data Can
   | CFin
   | CFZero
   | CFSucc
-  deriving (Eq, Show, Generic, Ord)
+  deriving (Eq, Show, Generic, Ord, Lift)
 
 data Twin
   = Only
   | TwinL
   | TwinR
-  deriving (Eq, Show, Generic)
+  deriving (Eq, Show, Generic, Lift)
 
 data Head
   = Var Nom
         Twin
   | Meta Nom
-  deriving (Eq, Show, Generic)
+  deriving (Eq, Show, Generic, Lift)
 
 data Elim = Elim CanElim [VAL]
-  deriving (Eq, Show, Generic)
+  deriving (Eq, Show, Generic, Lift)
 
 data CanElim =
   CA
@@ -100,7 +107,7 @@ data CanElim =
   | CEqElim
   | CVecElim
   | CFinElim
-  deriving (Eq, Show, Generic)
+  deriving (Eq, Show, Generic, Lift)
 
 -- data Elim
 --   = A VAL

@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE PatternSynonyms   #-}
+{-# LANGUAGE DeriveLift   #-}
 module Common where
 
 import Prelude hiding (print)
@@ -10,6 +11,8 @@ import Data.List
 
 import Text.PrettyPrint.HughesPJ hiding (parens)
 import qualified Text.PrettyPrint.HughesPJ as PP
+
+import Language.Haskell.TH.Lift
 
 import qualified Text.Parsec as P
 import qualified Text.Parsec.Pos as Pos
@@ -652,7 +655,7 @@ data Name
    =  Global  String
    |  Local   Int
    |  Quote   Int
-  deriving (Show, Eq)
+  deriving (Show, Eq, Lift)
 
 
 
